@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Style B — 有质感的白</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f0f0f0; font-family: 'Noto Sans SC', sans-serif; display: flex; justify-content: center; padding: 40px 20px; }
+.phone { width: 390px; height: 844px; background: #f2f2f7; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,0.15); }
+ruby { display: inline-flex; flex-direction: column-reverse; align-items: center; vertical-align: bottom; line-height: 1; }
+rt { font-size: 0.5em; color: #c62828; line-height: 1.4; font-family: 'Noto Serif JP', serif; }
+
+.content { flex: 1; overflow: hidden; padding: 28px 16px 0; }
+
+.page-header { background: #fff; border-radius: 14px; padding: 18px 18px 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.chapter-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #c62828; background: #ffebee; border-radius: 4px; padding: 3px 8px; margin-bottom: 8px; text-transform: uppercase; }
+.lesson-title { font-family: 'Noto Serif JP', serif; font-size: 26px; font-weight: 700; color: #1a1a1a; }
+.lesson-sub { font-size: 13px; color: #999; margin-top: 4px; }
+
+.progress-row { display: flex; gap: 4px; margin-top: 14px; }
+.p-seg { flex: 1; height: 3px; background: #e0e0e0; border-radius: 2px; }
+.p-seg.done { background: #bdbdbd; }
+.p-seg.active { background: #c62828; }
+
+.mod-tabs { display: flex; background: #fff; border-radius: 14px; padding: 4px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.mod-tab { flex: 1; text-align: center; font-size: 12px; font-weight: 500; color: #999; padding: 8px; border-radius: 10px; }
+.mod-tab.active { background: #c62828; color: #fff; }
+
+.section-head { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: #999; text-transform: uppercase; margin: 4px 4px 8px; }
+
+.vocab-card { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; }
+.vc-left { display: flex; align-items: baseline; gap: 12px; }
+.vc-ja { font-family: 'Noto Serif JP', serif; font-size: 22px; color: #1a1a1a; line-height: 1.9; }
+.vc-zh { font-size: 13px; color: #888; }
+.vc-pos { font-size: 10px; font-weight: 600; color: #c62828; background: #ffebee; border-radius: 4px; padding: 2px 7px; }
+
+.tabbar { display: flex; background: #fff; border-top: 1px solid #e0e0e0; padding: 10px 0 22px; }
+.tb-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.tb-icon { font-size: 22px; }
+.tb-label { font-size: 10px; color: #bbb; font-weight: 500; }
+.tb-item.active .tb-label { color: #c62828; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="content">
+    <div class="page-header">
+      <div class="chapter-tag">Chapter 1 · 自己紹介</div>
+      <div class="lesson-title">〜です</div>
+      <div class="lesson-sub">是……</div>
+      <div class="progress-row">
+        <div class="p-seg active"></div>
+        <div class="p-seg"></div><div class="p-seg"></div><div class="p-seg"></div>
+        <div class="p-seg"></div><div class="p-seg"></div><div class="p-seg"></div>
+      </div>
+    </div>
+
+    <div class="mod-tabs">
+      <div class="mod-tab active">模块一 · 输入</div>
+      <div class="mod-tab">模块二 · 输出</div>
+    </div>
+
+    <div class="section-head">词汇</div>
+
+    <div class="vocab-card">
+      <div class="vc-left">
+        <div class="vc-ja"><ruby>私<rt>わたし</rt></ruby></div>
+        <div class="vc-zh">我</div>
+      </div>
+      <div class="vc-pos">代词</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vc-left">
+        <div class="vc-ja">〜さん</div>
+        <div class="vc-zh">先生／女士</div>
+      </div>
+      <div class="vc-pos">接尾词</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vc-left">
+        <div class="vc-ja">あなた</div>
+        <div class="vc-zh">你</div>
+      </div>
+      <div class="vc-pos">代词</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vc-left">
+        <div class="vc-ja"><ruby>彼<rt>かれ</rt></ruby></div>
+        <div class="vc-zh">他</div>
+      </div>
+      <div class="vc-pos">代词</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vc-left">
+        <div class="vc-ja"><ruby>彼女<rt>かのじょ</rt></ruby></div>
+        <div class="vc-zh">她</div>
+      </div>
+      <div class="vc-pos">代词</div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tb-item active"><div class="tb-icon">📖</div><div class="tb-label">课程</div></div>
+    <div class="tb-item"><div class="tb-icon">🎵</div><div class="tb-label">转录</div></div>
+    <div class="tb-item"><div class="tb-icon">🗂</div><div class="tb-label">语料库</div></div>
+  </div>
+</div>
+</body>
+</html>

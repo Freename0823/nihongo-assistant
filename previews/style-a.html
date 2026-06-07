@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Style A — 极简干净</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #fff; font-family: 'Inter', 'Noto Sans SC', sans-serif; display: flex; justify-content: center; padding: 40px 20px; }
+.phone { width: 390px; height: 844px; background: #fff; border: 1px solid #e5e5e5; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.08); position: relative; }
+ruby { display: inline-flex; flex-direction: column-reverse; align-items: center; vertical-align: bottom; line-height: 1; }
+rt { font-size: 0.5em; color: #e00; line-height: 1.4; font-family: 'Noto Serif JP', serif; }
+
+/* Content */
+.content { flex: 1; overflow: hidden; padding: 32px 28px 0; }
+
+.label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; color: #999; text-transform: uppercase; margin-bottom: 6px; }
+.big-title { font-family: 'Noto Serif JP', serif; font-size: 32px; font-weight: 700; color: #111; line-height: 1.2; margin-bottom: 4px; }
+.sub { font-size: 14px; color: #aaa; margin-bottom: 32px; }
+
+.tabs { display: flex; gap: 0; margin-bottom: 28px; border-bottom: 1px solid #f0f0f0; }
+.tab { font-size: 13px; font-weight: 500; color: #bbb; padding: 0 0 10px; margin-right: 24px; border-bottom: 1.5px solid transparent; cursor: pointer; }
+.tab.active { color: #111; border-bottom-color: #111; }
+
+.section-title { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; color: #ccc; text-transform: uppercase; margin-bottom: 14px; }
+
+.vocab-item { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f5f5f5; }
+.vocab-ja { font-family: 'Noto Serif JP', serif; font-size: 20px; color: #111; line-height: 2; }
+.vocab-right { text-align: right; }
+.vocab-pos { font-size: 10px; color: #e33; font-weight: 600; letter-spacing: 0.06em; }
+.vocab-zh { font-size: 13px; color: #888; margin-top: 2px; }
+
+.progress-dots { display: flex; gap: 5px; margin-bottom: 28px; }
+.dot { flex: 1; height: 2px; background: #f0f0f0; border-radius: 1px; }
+.dot.done { background: #ddd; }
+.dot.active { background: #111; }
+
+/* Bottom bar */
+.tabbar { display: flex; border-top: 1px solid #f0f0f0; padding: 12px 0 20px; }
+.tb-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tb-icon { font-size: 20px; }
+.tb-label { font-size: 10px; color: #bbb; font-weight: 500; letter-spacing: 0.04em; }
+.tb-item.active .tb-label { color: #111; }
+.tb-item.active .tb-icon { filter: none; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="content">
+    <div class="label">Chapter 1 · 自己紹介</div>
+    <div class="big-title">〜です</div>
+    <div class="sub">是……</div>
+
+    <div class="progress-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">模块一 · 输入</div>
+      <div class="tab">模块二 · 输出</div>
+    </div>
+
+    <div class="section-title">词汇</div>
+
+    <div class="vocab-item">
+      <div class="vocab-ja"><ruby>私<rt>わたし</rt></ruby></div>
+      <div class="vocab-right"><div class="vocab-pos">代词</div><div class="vocab-zh">我</div></div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-ja">〜さん</div>
+      <div class="vocab-right"><div class="vocab-pos">接尾词</div><div class="vocab-zh">先生／女士</div></div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-ja">あなた</div>
+      <div class="vocab-right"><div class="vocab-pos">代词</div><div class="vocab-zh">你</div></div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-ja"><ruby>彼<rt>かれ</rt></ruby></div>
+      <div class="vocab-right"><div class="vocab-pos">代词</div><div class="vocab-zh">他</div></div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-ja"><ruby>彼女<rt>かのじょ</rt></ruby></div>
+      <div class="vocab-right"><div class="vocab-pos">代词</div><div class="vocab-zh">她</div></div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tb-item active"><div class="tb-icon">📖</div><div class="tb-label">课程</div></div>
+    <div class="tb-item"><div class="tb-icon">🎵</div><div class="tb-label">转录</div></div>
+    <div class="tb-item"><div class="tb-icon">🗂</div><div class="tb-label">语料库</div></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Style C — 大胆对比</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #e8e8e8; font-family: 'Noto Sans SC', sans-serif; display: flex; justify-content: center; padding: 40px 20px; }
+.phone { width: 390px; height: 844px; background: #fff; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,0.18); }
+ruby { display: inline-flex; flex-direction: column-reverse; align-items: center; vertical-align: bottom; line-height: 1; }
+rt { font-size: 0.5em; color: #e53935; line-height: 1.4; font-family: 'Noto Serif JP', serif; }
+
+.content { flex: 1; overflow: hidden; }
+
+/* Hero header — bold black block */
+.hero { background: #111; padding: 32px 24px 24px; }
+.hero-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: #e53935; text-transform: uppercase; margin-bottom: 12px; }
+.hero-title { font-family: 'Noto Serif JP', serif; font-size: 38px; font-weight: 700; color: #fff; line-height: 1.15; }
+.hero-sub { font-size: 14px; color: #666; margin-top: 6px; }
+.hero-progress { display: flex; gap: 3px; margin-top: 20px; }
+.hp { flex: 1; height: 2px; background: #333; border-radius: 1px; }
+.hp.active { background: #e53935; }
+.hp.done { background: #555; }
+
+.mod-tabs { display: flex; border-bottom: 2px solid #111; }
+.mod-tab { flex: 1; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #bbb; padding: 14px 8px; border-bottom: 3px solid transparent; margin-bottom: -2px; text-transform: uppercase; }
+.mod-tab.active { color: #111; border-bottom-color: #e53935; }
+
+.scroll-area { padding: 20px 24px 0; overflow: hidden; }
+.sec-title { font-size: 10px; font-weight: 900; letter-spacing: 0.15em; color: #ccc; text-transform: uppercase; margin-bottom: 16px; }
+
+.vocab-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f5f5; gap: 16px; }
+.vr-num { font-size: 11px; font-weight: 700; color: #e0e0e0; min-width: 20px; }
+.vr-ja { font-family: 'Noto Serif JP', serif; font-size: 22px; color: #111; line-height: 2; flex: 1; }
+.vr-right { text-align: right; }
+.vr-pos { font-size: 9px; font-weight: 700; color: #e53935; letter-spacing: 0.08em; text-transform: uppercase; }
+.vr-zh { font-size: 13px; color: #999; margin-top: 2px; }
+
+.tabbar { display: flex; border-top: 2px solid #111; padding: 12px 0 22px; }
+.tb-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.tb-icon { font-size: 20px; }
+.tb-label { font-size: 10px; color: #ccc; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.tb-item.active .tb-label { color: #e53935; }
+.tb-item.active .tb-dot { width: 4px; height: 4px; background: #e53935; border-radius: 50%; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="content">
+    <div class="hero">
+      <div class="hero-tag">Chapter 1 · 自己紹介</div>
+      <div class="hero-title">〜です</div>
+      <div class="hero-sub">是……</div>
+      <div class="hero-progress">
+        <div class="hp active"></div>
+        <div class="hp"></div><div class="hp"></div><div class="hp"></div>
+        <div class="hp"></div><div class="hp"></div><div class="hp"></div>
+      </div>
+    </div>
+
+    <div class="mod-tabs">
+      <div class="mod-tab active">输入</div>
+      <div class="mod-tab">输出</div>
+    </div>
+
+    <div class="scroll-area">
+      <div class="sec-title">词汇</div>
+
+      <div class="vocab-row">
+        <div class="vr-num">01</div>
+        <div class="vr-ja"><ruby>私<rt>わたし</rt></ruby></div>
+        <div class="vr-right"><div class="vr-pos">代词</div><div class="vr-zh">我</div></div>
+      </div>
+      <div class="vocab-row">
+        <div class="vr-num">02</div>
+        <div class="vr-ja">〜さん</div>
+        <div class="vr-right"><div class="vr-pos">接尾词</div><div class="vr-zh">先生／女士</div></div>
+      </div>
+      <div class="vocab-row">
+        <div class="vr-num">03</div>
+        <div class="vr-ja">あなた</div>
+        <div class="vr-right"><div class="vr-pos">代词</div><div class="vr-zh">你</div></div>
+      </div>
+      <div class="vocab-row">
+        <div class="vr-num">04</div>
+        <div class="vr-ja"><ruby>彼<rt>かれ</rt></ruby></div>
+        <div class="vr-right"><div class="vr-pos">代词</div><div class="vr-zh">他</div></div>
+      </div>
+      <div class="vocab-row">
+        <div class="vr-num">05</div>
+        <div class="vr-ja"><ruby>彼女<rt>かのじょ</rt></ruby></div>
+        <div class="vr-right"><div class="vr-pos">代词</div><div class="vr-zh">她</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tb-item active">
+      <div class="tb-icon">📖</div>
+      <div class="tb-label">课程</div>
+      <div class="tb-dot"></div>
+    </div>
+    <div class="tb-item"><div class="tb-icon">🎵</div><div class="tb-label">转录</div></div>
+    <div class="tb-item"><div class="tb-icon">🗂</div><div class="tb-label">语料库</div></div>
+  </div>
+</div>
+</body>
+</html>
