@@ -1,15 +1,13 @@
 import { useState } from 'react'
-import LessonPage from './LessonPage'
-import TranscribePage from './TranscribePage'
+import CoursePage from './CoursePage'
+import ListenPage from './ListenPage'
 import CorpusPage from './CorpusPage'
-import PlayerPage from './PlayerPage'
 import './index.css'
 
 const TABS = [
-  { id: 'lesson',     label: '课程',  icon: '📖' },
-  { id: 'player',     label: '精听',  icon: '▶️' },
-  { id: 'transcribe', label: '转录',  icon: '🎵' },
-  { id: 'corpus',     label: '语料库', icon: '🗂' },
+  { id: 'lesson', label: '课程',  icon: '📖' },
+  { id: 'listen', label: '精听',  icon: '🎧' },
+  { id: 'corpus', label: '语料库', icon: '🗂' },
 ]
 
 export default function App() {
@@ -23,10 +21,9 @@ export default function App() {
 
   return (
     <div className="app">
-      {tab === 'lesson'     && <LessonPage />}
-      {tab === 'player'     && <PlayerPage />}
-      {tab === 'transcribe' && <TranscribePage onSaved={handleSaved} />}
-      {tab === 'corpus'     && <CorpusPage refresh={corpusRefresh} />}
+      {tab === 'lesson' && <CoursePage />}
+      {tab === 'listen' && <ListenPage onSaved={handleSaved} />}
+      {tab === 'corpus' && <CorpusPage refresh={corpusRefresh} />}
 
       <nav className="tabbar">
         {TABS.map(t => (
