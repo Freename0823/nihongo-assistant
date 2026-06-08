@@ -17,7 +17,7 @@ function extractVideoId(url) {
 }
 
 // ── YouTube Player ──────────────────────────────────────────
-function YouTubePlayer({ item, onBack, onSaveToCorpus }) {
+function YouTubePlayer({ item, onBack, onSaveToCorpus, onWhisper }) {
   const [segments, setSegments] = useState([])
   const [activeIdx, setActiveIdx] = useState(-1)
   const [looping, setLooping] = useState(false)
@@ -138,8 +138,34 @@ function YouTubePlayer({ item, onBack, onSaveToCorpus }) {
       </div>
 
       {status === 'no_transcript' && (
-        <div style={{ background: '#fff8e1', border: '1px solid #ffe082', borderRadius: 10, padding: 16, marginBottom: 12, fontSize: '0.84em', color: '#5d4037', lineHeight: 1.7 }}>
-          这个视频没有字幕。你可以在「本地上传」转录音频。
+        <div style={{ background: '#fff8e1', border: '1px solid #ffe082', borderRadius: 12, padding: 16, marginBottom: 12 }}>
+          <div style={{ fontSize: '0.85em', fontWeight: 600, color: '#5d4037', marginBottom: 6 }}>📭 该视频没有上传字幕</div>
+          <div style={{ fontSize: '0.78em', color: '#795548', lineHeight: 1.7, marginBottom: 12 }}>
+            博主未上传字幕，可下载音频后用 Whisper AI 自动转录，准确率更高。
+          </div>
+          <button
+            className="btn btn-primary"
+            style={{ width: '100%', fontSize: '0.85em' }}
+            onClick={onWhisper}
+          >
+            🎙 用 Whisper 转录这个视频
+          </button>
+        </div>
+      )}
+
+      {status === 'error' && (
+        <div style={{ background: '#fce4ec', border: '1px solid #f48fb1', borderRadius: 12, padding: 16, marginBottom: 12 }}>
+          <div style={{ fontSize: '0.85em', fontWeight: 600, color: '#c62828', marginBottom: 6 }}>⚠️ 字幕加载失败</div>
+          <div style={{ fontSize: '0.78em', color: '#b71c1c', lineHeight: 1.7, marginBottom: 12 }}>
+            可能是网络问题或视频无法访问，也可以上传音频用 Whisper 转录。
+          </div>
+          <button
+            className="btn btn-primary"
+            style={{ width: '100%', fontSize: '0.85em' }}
+            onClick={onWhisper}
+          >
+            🎙 用 Whisper 转录这个视频
+          </button>
         </div>
       )}
 
@@ -348,7 +374,7 @@ export default function ListenPage({ onSaved }) {
   }
 
   if (view === 'youtube' && activeItem) {
-    return <YouTubePlayer item={activeItem} onBack={() => setView('list')} />
+    return <YouTubePlayer item={activeItem} onBack={() => setView('list')} onWhisper={() => setView('local')} />
   }
   if (view === 'local') {
     return <LocalTranscribe onBack={() => setView('list')} onSaved={onSaved} />
