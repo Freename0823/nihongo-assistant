@@ -26,6 +26,12 @@ function YouTubePlayer({ item, onBack, onSaveToCorpus, onWhisper }) {
   const [status, setStatus] = useState('loading')
   const [savedSet, setSavedSet] = useState(new Set())
   const [toast, setToast] = useState('')
+  const [whisperMode, setWhisperMode] = useState(false)
+  const [whisperFile, setWhisperFile] = useState(null)
+  const [whisperStatus, setWhisperStatus] = useState('idle')
+  const [whisperProgress, setWhisperProgress] = useState(0)
+  const [whisperError, setWhisperError] = useState('')
+  const whisperInputRef = useRef(null)
 
   const playerRef = useRef(null)
   const containerRef = useRef(null)
@@ -137,35 +143,73 @@ function YouTubePlayer({ item, onBack, onSaveToCorpus, onWhisper }) {
         </div>
       </div>
 
-      {status === 'no_transcript' && (
-        <div style={{ background: '#fff8e1', border: '1px solid #ffe082', borderRadius: 12, padding: 16, marginBottom: 12 }}>
-          <div style={{ fontSize: '0.85em', fontWeight: 600, color: '#5d4037', marginBottom: 6 }}>📭 该视频没有上传字幕</div>
-          <div style={{ fontSize: '0.78em', color: '#795548', lineHeight: 1.7, marginBottom: 12 }}>
-            博主未上传字幕，可下载音频后用 Whisper AI 自动转录，准确率更高。
+      {(status === 'no_transcript' || status === 'error') && !whisperMode && (
+        <div style={{ background: status === 'error' ? '#fce4ec' : '#fff8e1', border: `1px solid ${status === 'error' ? '#f48fb1' : '#ffe082'}`, borderRadius: 12, padding: 16, marginBottom: 12 }}>
+          <div style={{ fontSize: '0.85em', fontWeight: 600, color: status === 'error' ? '#c62828' : '#5d4037', marginBottom: 6 }}>
+            {status === 'error' ? '⚠️ 字幕加载失败' : '📭 该视频没有上传字幕'}
           </div>
-          <button
-            className="btn btn-primary"
-            style={{ width: '100%', fontSize: '0.85em' }}
-            onClick={onWhisper}
-          >
+          <div style={{ fontSize: '0.78em', color: status === 'error' ? '#b71c1c' : '#795548', lineHeight: 1.7, marginBottom: 12 }}>
+            可下载音频后用 Whisper AI 自动转录，准确率更高。
+          </div>
+          <button className="btn btn-primary" style={{ width: '100%', fontSize: '0.85em' }} onClick={() => setWhisperMode(true)}>
             🎙 用 Whisper 转录这个视频
           </button>
         </div>
       )}
 
-      {status === 'error' && (
-        <div style={{ background: '#fce4ec', border: '1px solid #f48fb1', borderRadius: 12, padding: 16, marginBottom: 12 }}>
-          <div style={{ fontSize: '0.85em', fontWeight: 600, color: '#c62828', marginBottom: 6 }}>⚠️ 字幕加载失败</div>
-          <div style={{ fontSize: '0.78em', color: '#b71c1c', lineHeight: 1.7, marginBottom: 12 }}>
-            可能是网络问题或视频无法访问，也可以上传音频用 Whisper 转录。
-          </div>
-          <button
-            className="btn btn-primary"
-            style={{ width: '100%', fontSize: '0.85em' }}
-            onClick={onWhisper}
-          >
-            🎙 用 Whisper 转录这个视频
-          </button>
+      {(status === 'no_transcript' || status === 'error') && whisperMode && (
+        <div style={{ background: 'var(--bg-card)', borderRadius: 12, padding: 16, marginBottom: 12, border: '1px solid var(--border)' }}>
+          <div style={{ fontSize: '0.85em', fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>🎙 Whisper 转录</div>
+
+          {whisperStatus === 'idle' && !whisperFile && (
+            <div className="upload-zone" style={{ marginBottom: 0 }} onClick={() => whisperInputRef.current?.click()}>
+              <div className="upload-icon">🎵</div>
+              <div className="upload-label">点击上传音频 / 视频文件</div>
+              <div className="upload-hint">mp3 · mp4 · wav · m4a · 最大 25MB</div>
+              <input ref={whisperInputRef} type="file" accept=".mp3,.mp4,.wav,.m4a,.webm,.mov" style={{ display: 'none' }}
+                onChange={e => {
+                  const f = e.target.files[0]
+                  if (f && f.size <= 25 * 1024 * 1024) { setWhisperFile(f); setWhisperError('') }
+                  else if (f) setWhisperError('文件不能超过 25MB')
+                }} />
+            </div>
+          )}
+
+          {whisperStatus === 'idle' && whisperFile && (
+            <>
+              <div className="file-preview" style={{ marginBottom: 12 }}>
+                <div className="file-icon">🎬</div>
+                <div className="file-info">
+                  <div className="file-name">{whisperFile.name}</div>
+                  <div className="file-size">{(whisperFile.size / 1024 / 1024).toFixed(1)} MB</div>
+                </div>
+                <button className="file-remove" onClick={() => setWhisperFile(null)}>✕</button>
+              </div>
+              <button className="btn btn-primary" style={{ width: '100%' }}
+                onClick={async () => {
+                  setWhisperStatus('transcribing'); setWhisperProgress(10); setWhisperError('')
+                  try {
+                    const segs = await transcribeAudio(whisperFile, setWhisperProgress)
+                    const cleaned = segs.map(s => ({ ...s, text: s.text.trim() })).filter(s => s.text.length > 0)
+                    setSegments(cleaned); setStatus('ready'); setWhisperMode(false)
+                    setToast('转录完成！'); setTimeout(() => setToast(''), 2500)
+                  } catch (e) { setWhisperError(e.message); setWhisperStatus('idle') }
+                }}>
+                开始转录
+              </button>
+            </>
+          )}
+
+          {whisperStatus === 'transcribing' && (
+            <div>
+              <div style={{ fontSize: '0.82em', color: 'var(--text-mid)', marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
+                <span>正在转录…</span><span>{whisperProgress}%</span>
+              </div>
+              <div className="progress-track"><div className="progress-fill" style={{ width: `${whisperProgress}%` }} /></div>
+            </div>
+          )}
+
+          {whisperError && <div className="error-box" style={{ marginTop: 8 }}>{whisperError}</div>}
         </div>
       )}
 
