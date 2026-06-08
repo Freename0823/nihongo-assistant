@@ -1,5 +1,6 @@
 import ytdl from '@distube/ytdl-core'
 import FormData from 'form-data'
+import fetch from 'node-fetch'
 
 export const config = { maxDuration: 60 }
 
